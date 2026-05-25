@@ -1,6 +1,17 @@
 from openai import OpenAI
 import json
 
+def clean_json_output(output):
+    clean_output = response.output_text.strip()
+
+    clean_output = clean_output.removeprefix("```json")
+    clean_output = clean_output.removeprefix("```")
+    clean_output = clean_output.removesuffix("```")
+
+    clean_output = clean_output.strip()
+
+    return clean_output
+
 client = OpenAI()
 
 running = True
@@ -36,13 +47,7 @@ while running:
         """
     )
 
-    clean_output = response.output_text.strip()
-
-    clean_output = clean_output.removeprefix("```json")
-    clean_output = clean_output.removeprefix("```")
-    clean_output = clean_output.removesuffix("```")
-
-    clean_output = clean_output.strip()
+    clean_output = clean_json_output(response.output_text)
 
     try:
         data = json.loads(clean_output)
