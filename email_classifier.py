@@ -2,7 +2,8 @@ from openai import OpenAI
 import json
 
 def clean_json_output(output):
-    clean_output = response.output_text.strip()
+
+    clean_output = output.strip()
 
     clean_output = clean_output.removeprefix("```json")
     clean_output = clean_output.removeprefix("```")
