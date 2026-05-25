@@ -3,9 +3,11 @@ import json
 
 client = OpenAI()
 
+customer_email = input("Bitte Kundenmail eingeben: ")
+
 response = client.responses.create(
     model="gpt-4.1-mini",
-    input="""
+    input=f"""
     Analysiere folgende Kundenemail.
 
     Gib die Antwort ausschließlich als JSON zurück.
@@ -17,7 +19,7 @@ response = client.responses.create(
     - suggested_reply
 
     Kundenmail:
-    "Hallo, ich habe gestern eine Rechnung erhalten, obwohl ich bereits bezahlt habe. Bitte prüfen Sie das."
+    "{customer_email}"
     """
 )
 
