@@ -1,5 +1,29 @@
 from openai import OpenAI
 import json
+def main():
+
+    client = OpenAI()
+
+    running = True
+
+    while running:
+        customer_email = input("Bitte Kundenmail eingeben: ")
+
+        try:
+            data = analyze_email(customer_email, client)
+
+            print("Kategorie:", data["category"])
+            print("Priorität:", data["priority"])
+            print("Zusammenfassung", data["summary"])
+            print("Antwortvorschlag:", data["suggested_reply"])
+
+        except json.JSONDecodeError:
+            print("Fehler: Die AI Antwort war kein gültiges JSON.")
+
+        continue_program = input("Weitere Email analysieren? (ja/nein): ")
+        if continue_program.lower() == "nein":
+            running = False
+
 
 def clean_json_output(output):
 
@@ -46,25 +70,5 @@ def analyze_email(customer_email, client):
     data = json.loads(clean_output)
     return data
 
-client = OpenAI()
-
-running = True
-
-while running:
-    customer_email = input("Bitte Kundenmail eingeben: ")
-
-    try:
-        data = analyze_email(customer_email, client)
-
-        print("Kategorie:", data["category"])
-        print("Priorität:", data["priority"])
-        print("Zusammenfassung", data["summary"])
-        print("Antwortvorschlag:", data["suggested_reply"])
-
-    except json.JSONDecodeError:
-        print("Fehler: Die AI Antwort war kein gültiges JSON.")
-
-    continue_program = input("Weitere Email analysieren? (ja/nein): ")
-    if continue_program.lower() == "nein":
-        running = False
-
+if __name__ == "__main__":
+    main()
