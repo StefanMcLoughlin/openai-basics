@@ -1,4 +1,5 @@
 from openai import OpenAI
+import json
 
 client = OpenAI()
 
@@ -20,4 +21,14 @@ response = client.responses.create(
     """
 )
 
-print(response.output_text)
+clean_output = response.output_text.strip()
+
+clean_output = clean_output.removeprefix("```json")
+clean_output = clean_output.removeprefix("```")
+clean_output = clean_output.removesuffix("```")
+
+clean_output = clean_output.strip()
+
+data = json.loads(clean_output)
+
+print(data)
