@@ -31,4 +31,7 @@ clean_output = clean_output.strip()
 
 data = json.loads(clean_output)
 
-print(data)
+print("Kategorie:", data["category"])
+print("Priorität:", data["priority"])
+print("Zusammenfassung", data["summary"])
+print("Antwortvorschlag:", data["suggested_reply"])
