@@ -29,9 +29,13 @@ clean_output = clean_output.removesuffix("```")
 
 clean_output = clean_output.strip()
 
-data = json.loads(clean_output)
+try:
+    data = json.loads(clean_output)
 
-print("Kategorie:", data["category"])
-print("Priorität:", data["priority"])
-print("Zusammenfassung", data["summary"])
-print("Antwortvorschlag:", data["suggested_reply"])
+    print("Kategorie:", data["category"])
+    print("Priorität:", data["priority"])
+    print("Zusammenfassung", data["summary"])
+    print("Antwortvorschlag:", data["suggested_reply"])
+
+except json.JSONDecodeError:
+    print("Fehler: Die AI Antwort war kein gültiges JSON.")
