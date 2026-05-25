@@ -13,13 +13,7 @@ def clean_json_output(output):
 
     return clean_output
 
-client = OpenAI()
-
-running = True
-
-while running:
-    customer_email = input("Bitte Kundenmail eingeben: ")
-
+def analyze_email(customer_email, client):
     response = client.responses.create(
         model="gpt-4.1-mini",
         input=f"""
@@ -49,9 +43,18 @@ while running:
     )
 
     clean_output = clean_json_output(response.output_text)
+    data = json.loads(clean_output)
+    return data
+
+client = OpenAI()
+
+running = True
+
+while running:
+    customer_email = input("Bitte Kundenmail eingeben: ")
 
     try:
-        data = json.loads(clean_output)
+        data = analyze_email(customer_email, client)
 
         print("Kategorie:", data["category"])
         print("Priorität:", data["priority"])
@@ -64,3 +67,4 @@ while running:
     continue_program = input("Weitere Email analysieren? (ja/nein): ")
     if continue_program.lower() == "nein":
         running = False
+
