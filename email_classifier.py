@@ -21,6 +21,16 @@ while running:
         - summary
         - suggested_reply
 
+        Für category sind nur folgende Werte erlaubt:
+        - abrechnung
+        - technik
+        - allgemeine_anfrage
+
+        Für priority sind nur folgende Werte erlaubt:
+        - niedrig
+        - mittel
+        - hoch
+
         Kundenmail:
         "{customer_email}"
         """
