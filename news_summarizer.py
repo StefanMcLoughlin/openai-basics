@@ -5,11 +5,26 @@ def main():
 
     client = OpenAI()
 
-    article_text = input("Bitte Artikel eingeben: ")
+    running = True
 
-    result = summarize_news(article_text, client)
+    while running:
+        article_text = input("Bitte Artikel eingeben: ")
 
-    print(result)
+        try:
+            data = summarize_news(article_text, client)
+
+            print("Kategorie:", data["category"])
+            print("Sentiment:", data["sentiment"])
+            print("Zusammenfassung:", data["summary"])
+            print("Key Points:", data["key_points"])
+            print("TLDR:", data["tldr"])
+
+        except json.JSONDecodeError:
+            print("Fehler: Die AI Antwort war kein gültiges JSON.")
+
+        continue_program = input("Weitere News analysieren? (ja/nein): ")
+        if continue_program.lower() == "nein":
+            running = False
 
 
 def summarize_news(article_text, client):
@@ -38,7 +53,24 @@ def summarize_news(article_text, client):
 
     )
 
-    return response.output_text
+    clean_output = clean_json_output(response.output_text)
+    data = json.loads(clean_output)
+    return data
+
+
+
+def clean_json_output(output):
+
+    clean_output = output.strip()
+
+    clean_output = clean_output.removeprefix("```json")
+    clean_output = clean_output.removeprefix("```")
+    clean_output = clean_output.removesuffix("```")
+
+    clean_output = clean_output.strip()
+
+    return clean_output
+
 
 if __name__ == "__main__":
     main()

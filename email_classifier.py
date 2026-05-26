@@ -14,7 +14,7 @@ def main():
 
             print("Kategorie:", data["category"])
             print("Priorität:", data["priority"])
-            print("Zusammenfassung", data["summary"])
+            print("Zusammenfassung:", data["summary"])
             print("Antwortvorschlag:", data["suggested_reply"])
 
         except json.JSONDecodeError:
