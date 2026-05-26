@@ -1,3 +1,5 @@
+import json
+
 def clean_json_output(output):
 
     clean_output = output.strip()
@@ -9,3 +11,9 @@ def clean_json_output(output):
     clean_output = clean_output.strip()
 
     return clean_output
+
+def parse_json_response(output):
+    clean_output = clean_json_output(output)
+    data = json.loads(clean_output)
+    
+    return data

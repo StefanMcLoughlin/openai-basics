@@ -1,6 +1,6 @@
 from openai import OpenAI
 import json
-from utils import clean_json_output
+from utils import clean_json_output, parse_json_response
 
 def main():
 
@@ -56,8 +56,7 @@ def analyze_email(customer_email, client):
         """
     )
 
-    clean_output = clean_json_output(response.output_text)
-    data = json.loads(clean_output)
+    data = parse_json_response(response.output_text)
     return data
 
 if __name__ == "__main__":
