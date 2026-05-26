@@ -16,7 +16,9 @@ def main():
             print("Kategorie:", data["category"])
             print("Sentiment:", data["sentiment"])
             print("Zusammenfassung:", data["summary"])
-            print("Key Points:", data["key_points"])
+            print("Key Points:")
+            for point in data["key_points"]:
+                print("-", point)
             print("TLDR:", data["tldr"])
 
         except json.JSONDecodeError:
