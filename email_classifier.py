@@ -1,5 +1,7 @@
 from openai import OpenAI
 import json
+from utils import clean_json_output
+
 def main():
 
     client = OpenAI()
@@ -24,18 +26,6 @@ def main():
         if continue_program.lower() == "nein":
             running = False
 
-
-def clean_json_output(output):
-
-    clean_output = output.strip()
-
-    clean_output = clean_output.removeprefix("```json")
-    clean_output = clean_output.removeprefix("```")
-    clean_output = clean_output.removesuffix("```")
-
-    clean_output = clean_output.strip()
-
-    return clean_output
 
 def analyze_email(customer_email, client):
     response = client.responses.create(
