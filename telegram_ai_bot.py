@@ -10,6 +10,13 @@ BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 openai_client = OpenAI()
 
+def main():
+    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
+    print("Bot läuft...")
+    app.run_polling()
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Hallo, der AI Bot funktioniert.")
 
@@ -27,13 +34,6 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
     await update.message.reply_text(response.output_text)
-
-def main():
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
-    print("Bot läuft...")
-    app.run_polling()
 
 if __name__ == "__main__":
     main()
