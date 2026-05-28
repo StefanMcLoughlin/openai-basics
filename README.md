@@ -52,6 +52,42 @@ Ein CLI Tool zur automatischen Analyse und Kategorisierung von Kundenemails mit 
 
 ---
 
+## AI News Summarizer
+
+Ein CLI Tool zur automatischen Analyse und Zusammenfassung von News-Artikeln mit der OpenAI API.
+
+### Features
+
+- OpenAI API Integration
+- strukturierte JSON Outputs
+- AI News Analyse
+- Sentiment Analyse
+- Kategorien-Erkennung
+- Zusammenfassungen in 2–3 Sätzen
+- TLDR Kurzfassung
+- Key Point Extraktion
+- Error Handling mit try/except
+- dynamische User Inputs
+- wiederverwendbare Funktionen über utils.py
+- modulare Code-Struktur mit main()
+
+### Beispiel Output
+
+```json
+{
+  "category": "Wirtschaft",
+  "sentiment": "neutral",
+  "summary": "Die Europäische Zentralbank hat beschlossen, die Zinssätze vorerst nicht zu ändern. Analysten sehen jedoch weiterhin wirtschaftliche Unsicherheiten.",
+  "key_points": [
+    "Die EZB hält die Zinssätze stabil.",
+    "Analysten erwarten weitere Unsicherheiten.",
+    "Die wirtschaftliche Entwicklung bleibt unklar."
+  ],
+  "tldr": "Die EZB belässt die Zinssätze stabil trotz wirtschaftlicher Unsicherheiten."
+}
+```
+---
+
 # Lernfokus
 
 Dieses Repository dient als praktisches Lern- und Portfolio-Repository mit Fokus auf:
